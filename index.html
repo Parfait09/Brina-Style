@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brina-Style</title>
+  <style>
+    body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.slider-section {
+  overflow: hidden;
+  padding: 10px;
+}
+
+.slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.slider::-webkit-scrollbar {
+  display: none; /* cache la barre de scroll */
+}
+
+.article-slide {
+  min-width: 180px;
+  max-width: 180px;
+  flex-shrink: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 10px;
+}
+
+.article-slide img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* recadre l’image sans la déformer */
+  border-radius: 8px;
+}
+
+.fleche {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 1;
+    }
+
+    .fleche:hover {
+      background-color: #27ae60;
+    }
+
+    .gauche {
+      left: 5px;
+    }
+
+    .droite {
+      right: 5px;
+    }
+    
+      /* ✅ Responsive : sur petits écrans, les articles prennent plus de largeur */
+    @media (max-width: 600px) {
+      .article-slide {
+        width: 70vw;
+      } 
+  footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+footer h3 {
+  margin-top: 0;
+  color: #f1c40f;
+}
+
+footer p, footer ul {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+footer li {
+  margin-bottom: 10px;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛍️ Brina-Style</h1>
+  </header>
+
+  <main>
+    
+<a href="index2.html" style="display: inline-block; padding: 10px 20px; background-color: #27ae60; color: white; text-decoration: none; border-radius: 5px;">
+  nouveautés</a>
+
+  </main>
+<section class="slider-section">
+  <h2>Nos meilleurs articles</h2>
+ <div class="slider-container">
+    <button class="fleche gauche" onclick="defileGauche()">⬅</button>
+    <div class="slider" id="slider">
+    <div class="article-slide">
+      <img src="image/photo1.jpg" alt="Robe rouge">
+      <h4>Robe rouge</h4>
+      <p>15 000 FCFA</p>
+    </div>
+    <div class="article-slide">
+      <img src="image/photo2.jpg" alt="Robe bleue">
+      <h4>Robe bleue</h4>
+      <p>14 000 FCFA</p>
+    </div>
+    <div class="article-slide">
+      <img src="image/photo3.jpg" alt="Robe orange">
+      <h4>Robe orange</h4>
+      <p>18 000 FCFA</p>
+    </div>
+     <div class="article-slide">
+      <img src="image/photo4.jpg" alt="Robe orange">
+      <h4>Robe orange</h4>
+      <p>18 000 FCFA</p>
+    </div>
+     <div class="article-slide">
+      <img src="image/photo5.jpg" alt="Robe orange">
+      <h4>Robe orange</h4>
+      <p>18 000 FCFA</p>
+    </div>
+    <button class="fleche droite" onclick="defileDroite()">➡</button>
+  </div>
+</section>
+
+    <footer>
+  <section class="bio">
+    <h3>La boutique du style</h3>
+    <p>
+      Bienvenue dans notre boutique de vêtements. Passionnés par la mode et la qualité,
+      nous vous proposons des articles soigneusement sélectionnés pour répondre à vos besoins.
+    </p>
+  </section>
+
+  <section class="reglement">
+    <h3>Règlement de la boutique</h3>
+    <ul>
+      <li>✅ Les paiements sont sécurisés et peuvent être effectués via Orange Money et wave.</li>
+      <li>📦 Livraison sous 48h après confirmation de la commande.</li>
+      <li>♻️ Retour possible sous 7 jours pour article non porté et en bon état.</li>
+      <li>📞 Service client disponible 24h/24 par WhatsApp.</li>
+    </ul>
+  </section>
+</footer>
+<script>
+  const slider = document.getElementById("slider");
+
+  function defileGauche() {
+    slider.scrollLeft -= 200;
+  }
+
+  function defileDroite() {
+    slider.scrollLeft += 200;
+  }
+
+</script>
+
+<!-- Bulle WhatsApp flottante -->
+<a href="https://wa.me/2250757757217" class="whatsapp-float" target="_blank" title="Discuter sur WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .whatsapp-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .whatsapp-icon:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .whatsapp-icon {
+      width: 50px;
+      height: 50px;
+    }
+  }
+</style>
+</body>
+</html>

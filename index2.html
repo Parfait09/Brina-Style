@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brina-Style</title>
+  <style>
+    body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.panier {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.panier.visible {
+  max-height: 500px; /* ajuste selon le contenu */
+  opacity: 1;
+}
+
+.produits {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 20px;
+}
+
+.produit {
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 250px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.produit img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #219150;
+}
+
+.contact {
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.contact input,
+.contact textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.contact button {
+  margin-top: 15px;
+  background-color: #27ae60;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.contact button:hover {
+  background-color: #1e8e4a;
+}
+
+.notification-panier {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #2ecc71;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.notification-panier.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+footer h3 {
+  margin-top: 0;
+  color: #f1c40f;
+}
+
+footer p, footer ul {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+footer li {
+  margin-bottom: 10px;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛍️ Brina-Style</h1>
+  </header>
+
+  <main>
+    
+<button onclick="afficherPanier()">🛒 Voir le panier</button>
+
+<!-- Conteneur du panier (vide au départ) -->
+<div id="panier" class="panier">
+  <h3>🛒 Votre panier</h3>
+  <ul id="liste-panier"></ul>
+
+<h3>📝 Informations de livraison</h3>
+<form id="form-commande">
+  <input type="text" id="nom-commande" placeholder="Nom et prénom" required><br>
+  <input type="email" id="email-commande" placeholder="Adresse email" required><br>
+  <input type="tel" id="telephone" placeholder="Téléphone" required><br>
+  <input type="text" id="localisation" placeholder="Localisation" required><br><br>
+  <button type="submit">Valider la commande</button>
+</form>
+</div>
+    
+    <section class="produits">
+      <div class="tri">
+  <button onclick="trierProduitsParNom()">🔤 Trier par nom</button>
+  <button onclick="trierProduitsParPrix()">💰 Trier par prix</button>
+</div>
+      <!-- Produit 1 -->
+      <div class="produit">
+        <img src="image/photo1.jpg" alt="la robe chic" />
+        <h2>T robe rouge </h2>
+        <p>Prix : 7 500 FCFA</p>
+        <button onclick="ajouterAuPanier('robe rouge', 7500)">Ajouter au panier</button>
+      </div>
+
+      <!-- Produit 2 -->
+      <div class="produit">
+        <img src="image/photo2.jpg" alt="la robe chic">
+        <h2>chic robe</h2>
+        <p>Prix : 12 000 FCFA</p>
+        <button onclick="ajouterAuPanier('chic robe', 12 000)">Ajouter au panier</button>
+      </div>
+
+      <!-- Produit 3 -->
+      <div class="produit">
+        <img src="image/photo3.jpg" alt="la robe chic">
+        <h2>elegant</h2>
+        <p>Prix : 12 000 FCFA</p>
+        <button onclick="ajouterAuPanier('elegant', 12 000)">Ajouter au panier</button>
+      </div>
+      
+      <!-- Produit 4 -->
+      <div class="produit">
+        <img src="image/photo4.jpg" alt="la robe chic">
+        <h2>chic robe</h2>
+        <p>Prix : 12 000 FCFA</p>
+        <button onclick="ajouterAuPanier('T-shirt blanc', 7500)">Ajouter au panier</button>
+      </div>
+      
+      <!-- Produit 5 -->
+      <div class="produit">
+        <img src="image/photo5.jpg" alt="la robe chic">
+        <h2>chic robe</h2>
+        <p>Prix : 12 000 FCFA</p>
+        <button onclick="ajouterAuPanier('T-shirt blanc', 7500)">Ajouter au panier</button>
+      </div>
+      
+      <!-- Produit 6 -->
+      <div class="produit">
+        <img src="image/photo6.jpg" alt="la robe chic">
+        <h2>chic robe</h2>
+        <p>Prix : 12 000 FCFA</p>
+        <button onclick="ajouterAuPanier('T-shirt blanc', 7500)">Ajouter au panier</button>
+      </div>
+      
+      <!-- Tu pourras ajouter d'autres produits ici -->
+    </section>
+  </main>
+<section class="contact">
+  <h2>📩 Contactez-nous</h2>
+  <form id="contact-form">
+    <label for="nom-contact">Nom :</label>
+    <input type="text" id="nom-contact" name="nom" required>
+
+    <label for="email-contact">Email :</label>
+    <input type="email" id="email-contact" name="email" required>
+
+    <label for="message">Message :</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <button type="submit">Envoyer le message</button>
+  </form>
+</section>
+  <section class="reglement">
+    <h3>Règlement de la boutique</h3>
+    <ul>
+      <li>✅ Les paiements sont sécurisés et peuvent être effectués via Orange Money et wave.</li>
+      <li>📦 Livraison sous 48h après confirmation de la commande.</li>
+      <li>♻️ Retour possible sous 7 jours pour article non porté et en bon état.</li>
+      <li>📞 Service client disponible 24h/24 par WhatsApp.</li>
+    </ul>
+  </section>
+</footer>
+  <script src="script.js"></script>
+  
+  <!-- Bulle WhatsApp flottante -->
+<a href="https://wa.me/2250757757217" class="whatsapp-float" target="_blank" title="Discuter sur WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .whatsapp-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .whatsapp-icon:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .whatsapp-icon {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  <!-- Notification flottante -->
+<div id="notif-panier" class="notification-panier">Article ajouté au panier</div>
+</body>
+</html>
